@@ -10,7 +10,7 @@ interface ApiService {
     @GET("top-headlines")
     suspend fun getHeadLines(
         @Query(ApiParams.COUNTRY) country: String = "br"
-    ): Response<DefaultListResponse<News>>
+    ): DefaultListResponse<News>
 }
 
 object ApiParams  {

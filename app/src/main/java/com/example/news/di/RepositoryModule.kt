@@ -5,6 +5,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.news.data.local.dao.NewsDao
 import com.example.news.data.local.db.AppDatabase
+import com.example.news.data.remote.ApiService
+import com.example.news.data.repository.NewsRepository
+import com.example.news.data.repository.NewsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,4 +33,8 @@ class RepositoryModule {
     fun provideAppDatabase(context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
 
+    @Singleton
+    @Provides
+    fun provideNewsRepository(apiService: ApiService, newsDao: NewsDao): NewsRepository =
+        NewsRepositoryImpl(apiService, newsDao)
 }
