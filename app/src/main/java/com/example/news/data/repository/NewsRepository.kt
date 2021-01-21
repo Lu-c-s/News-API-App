@@ -5,7 +5,7 @@ import com.example.news.data.remote.responses.DefaultListResponse
 
 interface NewsRepository {
     // Remote
-    suspend fun getHeadlines(country: String?): DefaultListResponse<News>
+    suspend fun getHeadlines(country: String? = "br"): DefaultListResponse<News>
 
     // Local
     suspend fun insertNewsListLocal(news: List<News>)

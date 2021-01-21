@@ -1,4 +1,4 @@
-package com.example.news.ui.NewsList
+package com.example.news.ui.newsList
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.news.R
+import com.example.news.databinding.NewsListFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsListFragment : Fragment() {
     private lateinit var viewModel: NewsListViewModel
 
@@ -15,7 +17,13 @@ class NewsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.news_list_fragment, container, false)
+        val binding = NewsListFragmentBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(NewsListViewModel::class.java)
+
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        return binding.root
     }
 
 }

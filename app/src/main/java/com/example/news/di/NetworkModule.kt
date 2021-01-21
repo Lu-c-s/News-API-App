@@ -7,24 +7,54 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 const val BASE_URL = "https://newsapi.org/v2/"
+const val API_KEY = "a0c843c4b4a9424c862a203e46e7ee8f"
 
 @InstallIn(ApplicationComponent::class)
 @Module
 class NetworkModule {
+
+    @Singleton
+    @Provides
+    fun provideHeaderInterceptor(): Interceptor =
+        Interceptor { chain ->
+            val request = chain.request()
+            val newUrl = request.url.newBuilder()
+                .addQueryParameter("apiKey", API_KEY)
+                .build()
+            val newRequest = request.newBuilder()
+                .url(newUrl)
+                .method(request.method, request.body)
+                .build()
+            chain.proceed(newRequest)
+        }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(
+        header: Interceptor
+    ): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(header)
+            .build()
+
     @Singleton
     @Provides
     fun provideAppRetrofit(
+        okHttpClient: OkHttpClient,
         moshi: Moshi
     ): Retrofit =
         Retrofit
             .Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(BASE_URL)
+            .client(okHttpClient)
             .build()
 
     @Singleton
@@ -34,5 +64,5 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMoshi() : Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    fun provideMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 }

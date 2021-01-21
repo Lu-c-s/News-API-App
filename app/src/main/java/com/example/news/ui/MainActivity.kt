@@ -17,25 +17,25 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
          binding = ActivityMainBinding.inflate(layoutInflater)
-         setContentView(binding.root)
-
-        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.navView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.miItem1 -> Toast.makeText(applicationContext, "Clicked item 1", Toast.LENGTH_SHORT).show()
-                R.id.miItem2 -> Toast.makeText(applicationContext, "Clicked item 2", Toast.LENGTH_SHORT).show()
-                R.id.miItem3 -> Toast.makeText(applicationContext, "Clicked item 3", Toast.LENGTH_SHORT).show()
-            }
-
-            true
-        }
-
-        setBottomNavigation()
+         setContentView(R.layout.activity_main)
+//
+//        toggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
+//        binding.drawerLayout.addDrawerListener(toggle)
+//        toggle.syncState()
+//
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//
+//        binding.navView.setNavigationItemSelectedListener {
+//            when(it.itemId){
+//                R.id.miItem1 -> Toast.makeText(applicationContext, "Clicked item 1", Toast.LENGTH_SHORT).show()
+//                R.id.miItem2 -> Toast.makeText(applicationContext, "Clicked item 2", Toast.LENGTH_SHORT).show()
+//                R.id.miItem3 -> Toast.makeText(applicationContext, "Clicked item 3", Toast.LENGTH_SHORT).show()
+//            }
+//
+//            true
+//        }
+//
+//        setBottomNavigation()
     }
 
     private fun setBottomNavigation() {
