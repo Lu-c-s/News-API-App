@@ -1,32 +1,30 @@
 package com.example.news.ui.newsDetail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.news.R
+import com.example.news.databinding.NewsDetailFragmentBinding
+import com.google.android.material.appbar.AppBarLayout
+
 
 class NewsDetailFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = NewsDetailFragment()
-    }
-
     private lateinit var viewModel: NewsDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.news_detail_fragment, container, false)
-    }
+        val binding = NewsDetailFragmentBinding.inflate(inflater, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(NewsDetailViewModel::class.java)
-        // TODO: Use the ViewModel
+        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
+
+
+
+        return binding.root
     }
 
 }
