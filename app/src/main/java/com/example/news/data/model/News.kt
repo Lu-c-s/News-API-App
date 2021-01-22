@@ -1,11 +1,14 @@
 package com.example.news.data.model
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "news")
+@Parcelize
 data class News(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
@@ -20,4 +23,4 @@ data class News(
     val urlToImage: String?,
     @Embedded
     val source: Source?
-)
+) : Parcelable

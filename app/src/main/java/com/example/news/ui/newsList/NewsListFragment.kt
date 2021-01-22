@@ -21,7 +21,9 @@ class NewsListFragment : Fragment() {
     ): View? {
         val binding = NewsListFragmentBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(NewsListViewModel::class.java)
-        val adapter = NewsListAdapter()
+        val adapter = NewsListAdapter( NewsListAdapter.OnClickListener {
+            viewModel.displayNewsDetail(it)
+        })
 
        binding.newsList.adapter = adapter
         binding.lifecycleOwner = this

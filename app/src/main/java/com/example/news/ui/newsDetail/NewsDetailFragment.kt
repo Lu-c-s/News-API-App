@@ -22,7 +22,24 @@ class NewsDetailFragment : Fragment() {
 
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.toolbar)
 
+    binding.appBar.addOnOffsetChangedListener(object: AppBarLayout.OnOffsetChangedListener {
+        var isShow = true
+        var scrollRange = -1
 
+        override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+           if(scrollRange == -1){
+               if (appBarLayout != null) {
+                   scrollRange = appBarLayout.totalScrollRange
+               }
+           }
+
+            if(scrollRange + verticalOffset == 0) {
+                isShow = true
+            } else if(isShow) {
+                isShow = false
+            }
+        }
+    })
 
         return binding.root
     }

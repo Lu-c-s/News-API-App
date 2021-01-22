@@ -31,4 +31,8 @@ class NewsListViewModel @ViewModelInject constructor(newsRepository: NewsReposit
         }
     }
 
+    fun displayNewsDetail(news: News) {
+
+    }
+
 }
