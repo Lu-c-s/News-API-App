@@ -9,15 +9,15 @@ import androidx.room.PrimaryKey
 data class News(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val author: String,
-    val content: String,
-    val description: String,
+    val author: String?,
+    val content: String?,
+    val description: String?,
     @ColumnInfo(name = "published_at")
-    val publishedAt: String,
-    val title: String,
-    val url: String,
+    val publishedAt: String?,
+    val title: String?,
+    val url: String?,
     @ColumnInfo(name = "url_to_image")
-    val urlToImage: String,
+    val urlToImage: String?,
     @Embedded
-    val source: Source
+    val source: Source?
 )

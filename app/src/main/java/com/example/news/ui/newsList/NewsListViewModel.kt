@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 
-class NewsListViewModel @ViewModelInject constructor(private val newsRepository: NewsRepository) :
+class NewsListViewModel @ViewModelInject constructor(newsRepository: NewsRepository) :
     ViewModel() {
     private val _newsList = MutableLiveData<List<News>>()
     val newsList: LiveData<List<News>> = _newsList
@@ -21,8 +21,8 @@ class NewsListViewModel @ViewModelInject constructor(private val newsRepository:
         viewModelScope.launch {
             try {
                 var responseList = newsRepository.getHeadlines()
-
                 if (responseList?.totalResults!! > 0) {
+                    Log.d("TAG", responseList.toString())
                     _newsList.value = responseList.articles
                 }
             } catch (e: Exception) {

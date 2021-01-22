@@ -9,8 +9,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 const val BASE_URL = "https://newsapi.org/v2/"
@@ -22,6 +24,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    @Named("header")
     fun provideHeaderInterceptor(): Interceptor =
         Interceptor { chain ->
             val request = chain.request()
@@ -37,11 +40,21 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    @Named("logging")
+    fun provideLoggingInterceptor(): Interceptor =
+        HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+    @Singleton
+    @Provides
     fun provideOkHttpClient(
-        header: Interceptor
+        @Named("header") header: Interceptor,
+        @Named("logging") logging: Interceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(header)
+            .addInterceptor(logging)
             .build()
 
     @Singleton

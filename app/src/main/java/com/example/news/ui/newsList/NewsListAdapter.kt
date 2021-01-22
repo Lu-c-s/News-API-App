@@ -12,13 +12,13 @@ class NewsListAdapter: ListAdapter<News, NewsListAdapter.ViewHolder>(DiffCallbac
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            NewsListItemBinding.inflate(LayoutInflater.from(parent.context))
+            NewsListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val grocery = getItem(position)
-        holder.bind(grocery)
+        val news = getItem(position)
+        holder.bind(news)
     }
 
     class ViewHolder(private val binding: NewsListItemBinding): RecyclerView.ViewHolder(binding.root) {

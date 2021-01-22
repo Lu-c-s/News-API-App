@@ -16,39 +16,28 @@
 
         <ImageView
             android:id="@+id/newsImage"
-            android:layout_width="97dp"
-            android:layout_height="92dp"
+            android:layout_width="94dp"
+            android:layout_height="70dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/news_image"
+            android:scaleType="fitCenter"
+            app:bindImage="@{news.urlToImage}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:bindImage="@{news.urlToImage}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/newsTitle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{news.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/newsImage"
-            app:layout_constraintTop_toTopOf="@+id/newsImage"
-            />
-
-        <TextView
-            android:id="@+id/newsDescription"
-            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginEnd="16dp"
-            android:text="@{news.description}"
             app:layout_constraintBottom_toBottomOf="@+id/newsImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/newsImage"
-            app:layout_constraintTop_toBottomOf="@+id/newsTitle" />
+            app:layout_constraintTop_toTopOf="@+id/newsImage"
+            app:newsTitle="@{news}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

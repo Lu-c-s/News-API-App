@@ -4,6 +4,6 @@ import androidx.room.ColumnInfo
 
 data class Source(
     @ColumnInfo(name = "source_id")
-    val id: String,
-    val name: String
+    val id: String?,
+    val name: String?
 )
